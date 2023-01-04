@@ -12,8 +12,11 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { useSelector, useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
+import mainInfoSlice from '../features/mainInfo/mainInfoSlice';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  mainInfo: mainInfoSlice,
+});
 
 const persistConfig = {
   key: 'root',
