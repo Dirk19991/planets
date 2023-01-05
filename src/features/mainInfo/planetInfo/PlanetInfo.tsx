@@ -5,8 +5,8 @@ import { Flex } from '../../../common/Flex';
 import Buttons from '../buttons/Buttons';
 
 const FlexPlanetInfo = styled(Flex)`
-  width: 30%;
-  min-height: 600px;
+  width: 35%;
+  gap: 2.5rem;
 `;
 
 const PlanetName = styled.div`
@@ -19,6 +19,7 @@ const PlanetName = styled.div`
 const PlanetDescription = styled.div`
   font-family: 'Spartan', sans-serif;
   color: rgb(255, 255, 255, 0.7);
+  line-height: 1.5rem;
   text-align: start;
 `;
 
@@ -33,7 +34,7 @@ function PlanetInfo() {
   return (
     <FlexPlanetInfo
       direction='column'
-      justify='space-around'
+      justify='space-between'
       align='flex-start'
     >
       <PlanetName>{name}</PlanetName>

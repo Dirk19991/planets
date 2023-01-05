@@ -29,6 +29,28 @@ const PlanetsHeader = styled.div`
   cursor: pointer;
 `;
 
+const PlanetDiv = styled.div`
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 10%;
+    height: 4px;
+    background-color: green;
+    top: -30px;
+    left: 0;
+    opacity: 0;
+    transition: width 0.5s;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    width: 100%;
+  }
+`;
+
 function Header() {
   const planets: Planet[] = [
     'Mercury',
@@ -53,9 +75,9 @@ function Header() {
         <PlanetsHeader>THE PLANETS</PlanetsHeader>
         <PlanetsFlex justify='space-between' align='center' gap='2rem'>
           {planets.map((planet) => (
-            <div onClick={() => setPlanetHandler(planet)} key={planet}>
+            <PlanetDiv onClick={() => setPlanetHandler(planet)} key={planet}>
               {planet.toUpperCase()}
-            </div>
+            </PlanetDiv>
           ))}
         </PlanetsFlex>
       </HeaderFlex>
