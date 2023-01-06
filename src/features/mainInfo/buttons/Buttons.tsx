@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Flex } from '../../../common/Flex';
 import { InfoType, setPlanet } from '../mainInfoSlice';
+import {
+  setActivePlanet,
+  setActiveInfoType,
+} from '../../../app/animationSlice';
 
 interface ButtonProps {
   selected: boolean;
@@ -35,7 +39,11 @@ function Buttons() {
   const dispatch = useAppDispatch();
 
   const infoTypeHandler = (infoType: InfoType) => {
-    dispatch(setPlanet({ infoType: infoType }));
+    dispatch(setActivePlanet(false));
+    setTimeout(() => {
+      dispatch(setActivePlanet(true));
+      dispatch(setPlanet({ infoType: infoType }));
+    }, 1000);
   };
 
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);

@@ -13,9 +13,11 @@ import storage from 'redux-persist/lib/storage';
 import { useSelector, useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import mainInfoSlice from '../features/mainInfo/mainInfoSlice';
+import animationSlice from './animationSlice';
 
 const rootReducer = combineReducers({
   mainInfo: mainInfoSlice,
+  animation: animationSlice,
 });
 
 const persistConfig = {

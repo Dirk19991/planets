@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import data from '../../../data/planets.json';
-import { Data } from '../../../types';
 import { useAppSelector } from '../../../app/store';
-import planetEarth from '../../../assets/images/planet-earth.svg';
 import { InfoType, Planet } from '../mainInfoSlice';
+import { motion } from 'framer-motion';
 
 interface PlanetIconContainerProps {
   image?: string;
 }
 
-const PlanetIconContainer = styled.div<PlanetIconContainerProps>`
+const PlanetIconContainer = styled(motion.div)<PlanetIconContainerProps>`
   min-width: 400px;
   min-height: 400px;
   max-width: 500px;
@@ -30,16 +28,9 @@ const PlanetIconContainer = styled.div<PlanetIconContainerProps>`
   }
 `;
 
-const PlanetImage = styled.img`
+const PlanetImage = styled(motion.img)`
   width: 100%;
   height: 100%;
-`;
-
-const SurfaceImage = styled.div`
-  position: absolute;
-
-  top: 100%;
-  right: 0;
 `;
 
 function getImgUrl(name: Planet, infoType: InfoType) {
@@ -60,16 +51,24 @@ function getImgUrl(name: Planet, infoType: InfoType) {
 function PlanetIcon() {
   const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
+  const active = useAppSelector((state) => state.animation.isActivePlanet);
 
   let beforeImageLink;
   currentInfoType === 'surface'
     ? (beforeImageLink = getImgUrl(currentPlanet, currentInfoType)[1])
     : '';
 
-  console.log(beforeImageLink);
-
   return (
-    <PlanetIconContainer image={beforeImageLink}>
+    <PlanetIconContainer
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={
+        active
+          ? { x: 0, y: 0, rotate: 0, opacity: 1, scale: 1 }
+          : { x: -500, y: -300, rotate: 180, opacity: 0, scale: 0.5 }
+      }
+      transition={{ duration: 0.5 }}
+      image={beforeImageLink}
+    >
       <PlanetImage src={getImgUrl(currentPlanet, currentInfoType)[0]} alt='' />
     </PlanetIconContainer>
   );

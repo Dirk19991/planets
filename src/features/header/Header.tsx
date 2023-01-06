@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Flex } from '../../common/Flex';
-import { MainInfo, Planet } from '../mainInfo/mainInfoSlice';
+import { Planet } from '../mainInfo/mainInfoSlice';
 import { setPlanet } from '../mainInfo/mainInfoSlice';
+import { setActivePlanet } from '../../app/animationSlice';
 
 const HeaderFlex = styled(Flex)`
   color: white;
@@ -65,8 +66,17 @@ function Header() {
 
   const dispatch = useAppDispatch();
 
+  const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
+
   const setPlanetHandler = (planet: Planet) => {
-    dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
+    if (planet === currentPlanet) {
+      return;
+    }
+    dispatch(setActivePlanet(false));
+    setTimeout(() => {
+      dispatch(setActivePlanet(true));
+      dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
+    }, 1000);
   };
 
   return (
