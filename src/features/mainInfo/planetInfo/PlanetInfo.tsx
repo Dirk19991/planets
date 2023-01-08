@@ -3,7 +3,8 @@ import data from '../../../data/planets.json';
 import { useAppSelector } from '../../../app/store';
 import { Flex } from '../../../common/Flex';
 import Buttons from '../buttons/Buttons';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { getTextAnimation } from '../../../utils/animations';
 
 const FlexPlanetInfo = styled(Flex)`
   width: 35%;
@@ -27,7 +28,12 @@ const PlanetDescription = styled(motion.div)`
 function PlanetInfo() {
   const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
-  const active = useAppSelector((state) => state.animation.isActivePlanet);
+  const activePlanet = useAppSelector(
+    (state) => state.animation.isActivePlanet
+  );
+  const activeInfoType = useAppSelector(
+    (state) => state.animation.isActiveInfoType
+  );
 
   const currentPlanetInfo = data.filter((elem) => elem.name === currentPlanet);
   const name = currentPlanetInfo[0].name;
@@ -41,14 +47,14 @@ function PlanetInfo() {
     >
       <PlanetName
         initial={{ opacity: 1 }}
-        animate={active ? { opacity: 1 } : { opacity: 0 }}
+        animate={getTextAnimation(activePlanet, activeInfoType)}
         transition={{ duration: 0.5 }}
       >
         {name}
       </PlanetName>
       <PlanetDescription
         initial={{ opacity: 1 }}
-        animate={active ? { opacity: 1 } : { opacity: 0 }}
+        animate={getTextAnimation(activePlanet, activeInfoType)}
         transition={{ duration: 0.5 }}
       >
         {description}

@@ -37,16 +37,19 @@ const Number = styled(Flex)`
 
 function Buttons() {
   const dispatch = useAppDispatch();
+  const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
 
   const infoTypeHandler = (infoType: InfoType) => {
-    dispatch(setActivePlanet(false));
-    setTimeout(() => {
-      dispatch(setActivePlanet(true));
-      dispatch(setPlanet({ infoType: infoType }));
-    }, 1000);
-  };
+    if (infoType === currentInfoType) {
+      return;
+    }
+    dispatch(setActiveInfoType(false));
 
-  const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
+    setTimeout(() => {
+      dispatch(setPlanet({ infoType: infoType }));
+      dispatch(setActiveInfoType(true));
+    }, 700);
+  };
 
   return (
     <Flex direction='column' gap='1rem'>

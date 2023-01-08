@@ -4,6 +4,7 @@ import { Flex } from '../../common/Flex';
 import { Planet } from '../mainInfo/mainInfoSlice';
 import { setPlanet } from '../mainInfo/mainInfoSlice';
 import { setActivePlanet } from '../../app/animationSlice';
+import { motion } from 'framer-motion';
 
 const HeaderFlex = styled(Flex)`
   color: white;
@@ -30,26 +31,19 @@ const PlanetsHeader = styled.div`
   cursor: pointer;
 `;
 
-const PlanetDiv = styled.div`
+const PlanetDiv = styled(motion.div)`
   position: relative;
+`;
 
-  &::before {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 10%;
-    height: 4px;
-    background-color: green;
-    top: -30px;
-    left: 0;
-    opacity: 0;
-    transition: width 0.5s;
-  }
-
-  &:hover::before {
-    opacity: 1;
-    width: 100%;
-  }
+const UpperLine = styled(motion.div)`
+  position: absolute;
+  display: block;
+  width: 0%;
+  height: 4px;
+  background-color: white;
+  top: -30px;
+  left: 10%;
+  opacity: 1;
 `;
 
 function Header() {
@@ -76,7 +70,7 @@ function Header() {
     setTimeout(() => {
       dispatch(setActivePlanet(true));
       dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
-    }, 1000);
+    }, 700);
   };
 
   return (
@@ -85,7 +79,17 @@ function Header() {
         <PlanetsHeader>THE PLANETS</PlanetsHeader>
         <PlanetsFlex justify='space-between' align='center' gap='2rem'>
           {planets.map((planet) => (
-            <PlanetDiv onClick={() => setPlanetHandler(planet)} key={planet}>
+            <PlanetDiv
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.3 },
+              }}
+              onClick={() => setPlanetHandler(planet)}
+              key={planet}
+            >
+              {currentPlanet === planet && (
+                <UpperLine animate={{ width: '80%' }} />
+              )}
               {planet.toUpperCase()}
             </PlanetDiv>
           ))}

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../../app/store';
-import { InfoType, Planet } from '../mainInfoSlice';
 import { motion } from 'framer-motion';
+import { getIconAnimation } from '../../../utils/animations';
+import { getImgUrl } from '../../../utils/getImgUrl';
 
 interface PlanetIconContainerProps {
   image?: string;
@@ -33,25 +34,15 @@ const PlanetImage = styled(motion.img)`
   height: 100%;
 `;
 
-function getImgUrl(name: Planet, infoType: InfoType) {
-  const planet = name.toLowerCase();
-  switch (infoType) {
-    case 'overview':
-      return [`/src/assets/images/planet-${planet}.svg`];
-    case 'internal':
-      return [`/src/assets/images/planet-${planet}-internal.svg`];
-    case 'surface':
-      return [
-        `/src/assets/images/planet-${planet}.svg`,
-        `/src/assets/images/planet-${planet}-geology.png`,
-      ];
-  }
-}
-
 function PlanetIcon() {
   const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
-  const active = useAppSelector((state) => state.animation.isActivePlanet);
+  const activePlanet = useAppSelector(
+    (state) => state.animation.isActivePlanet
+  );
+  const activeInfoType = useAppSelector(
+    (state) => state.animation.isActiveInfoType
+  );
 
   let beforeImageLink;
   currentInfoType === 'surface'
@@ -60,12 +51,8 @@ function PlanetIcon() {
 
   return (
     <PlanetIconContainer
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={
-        active
-          ? { x: 0, y: 0, rotate: 0, opacity: 1, scale: 1 }
-          : { x: -500, y: -300, rotate: 180, opacity: 0, scale: 0.5 }
-      }
+      initial={{ opacity: 1, scale: 1 }}
+      animate={getIconAnimation(activePlanet, activeInfoType)}
       transition={{ duration: 0.5 }}
       image={beforeImageLink}
     >
