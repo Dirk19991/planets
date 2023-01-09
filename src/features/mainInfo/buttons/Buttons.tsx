@@ -2,14 +2,25 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Flex } from '../../../common/Flex';
 import { InfoType, setPlanet } from '../mainInfoSlice';
-import {
-  setActivePlanet,
-  setActiveInfoType,
-} from '../../../app/animationSlice';
+import { setActiveInfoType } from '../../../app/animationSlice';
+import { useMediaQuery } from 'react-responsive';
 
 interface ButtonProps {
   selected: boolean;
 }
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+  }
+`;
 
 const Button = styled.button<ButtonProps>`
   width: 300px;
@@ -30,6 +41,20 @@ const Button = styled.button<ButtonProps>`
   }
 
   transition: all 0.5s;
+
+  @media (max-width: 1024px) {
+    width: 100px;
+    border: none;
+    background-color: rgb(7, 7, 34);
+    line-height: 2.5;
+    color: ${(props) =>
+      props.selected ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.5)'};
+
+    &:hover {
+      transform: scale(1.2);
+      background-color: rgb(7, 7, 34);
+    }
+  }
 `;
 const Number = styled(Flex)`
   min-width: 2rem;
@@ -38,6 +63,10 @@ const Number = styled(Flex)`
 function Buttons() {
   const dispatch = useAppDispatch();
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
+
+  const desktop = useMediaQuery({
+    query: '(min-width: 1024px)',
+  });
 
   const infoTypeHandler = (infoType: InfoType) => {
     if (infoType === currentInfoType) {
@@ -48,17 +77,17 @@ function Buttons() {
     setTimeout(() => {
       dispatch(setPlanet({ infoType: infoType }));
       dispatch(setActiveInfoType(true));
-    }, 700);
+    }, 1400);
   };
 
   return (
-    <Flex direction='column' gap='1rem'>
+    <ButtonContainer>
       <Button
         selected={currentInfoType === 'overview' ? true : false}
         onClick={() => infoTypeHandler('overview')}
       >
         <Flex justify='flex-start' gap='2rem'>
-          <Number>01</Number>
+          {desktop && <Number>01</Number>}
           <div>Overview</div>
         </Flex>
       </Button>
@@ -67,8 +96,8 @@ function Buttons() {
         onClick={() => infoTypeHandler('internal')}
       >
         <Flex justify='flex-start' gap='2rem'>
-          <Number>02</Number>
-          <div>Internal Structure</div>
+          {desktop && <Number>02</Number>}
+          <div>{desktop ? 'Internal Structure' : 'Structure'}</div>
         </Flex>
       </Button>
       <Button
@@ -76,11 +105,11 @@ function Buttons() {
         onClick={() => infoTypeHandler('surface')}
       >
         <Flex justify='flex-start' gap='2rem'>
-          <Number>03</Number>
-          <div>Surface geology</div>
+          {desktop && <Number>03</Number>}
+          <div>{desktop ? 'Surface geology' : 'Surface'}</div>
         </Flex>
       </Button>
-    </Flex>
+    </ButtonContainer>
   );
 }
 export default Buttons;

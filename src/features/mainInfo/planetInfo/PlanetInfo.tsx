@@ -5,10 +5,15 @@ import { Flex } from '../../../common/Flex';
 import Buttons from '../buttons/Buttons';
 import { motion } from 'framer-motion';
 import { getTextAnimation } from '../../../utils/animations';
+import { useMediaQuery } from 'react-responsive';
 
 const FlexPlanetInfo = styled(Flex)`
   width: 35%;
   gap: 2.5rem;
+  @media (max-width: 1024px) {
+    width: 100%;
+    align-items: center;
+  }
 `;
 
 const PlanetName = styled(motion.div)`
@@ -39,27 +44,24 @@ function PlanetInfo() {
   const name = currentPlanetInfo[0].name;
   const description = currentPlanetInfo[0][currentInfoType];
 
+  const desktop = useMediaQuery({
+    query: '(min-width: 1024px)',
+  });
+
   return (
     <FlexPlanetInfo
+      as={motion.div}
       direction='column'
       justify='space-between'
       align='flex-start'
+      initial={{ opacity: 1 }}
+      animate={getTextAnimation(activePlanet, activeInfoType)}
+      transition={{ duration: 1 }}
     >
-      <PlanetName
-        initial={{ opacity: 1 }}
-        animate={getTextAnimation(activePlanet, activeInfoType)}
-        transition={{ duration: 0.5 }}
-      >
-        {name}
-      </PlanetName>
-      <PlanetDescription
-        initial={{ opacity: 1 }}
-        animate={getTextAnimation(activePlanet, activeInfoType)}
-        transition={{ duration: 0.5 }}
-      >
-        {description}
-      </PlanetDescription>
-      <Buttons />
+      <PlanetName>{name}</PlanetName>
+      <PlanetDescription>{description}</PlanetDescription>
+
+      {desktop && <Buttons />}
     </FlexPlanetInfo>
   );
 }

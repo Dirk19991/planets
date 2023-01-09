@@ -16,10 +16,21 @@ export function getTextAnimation(
   activeInfoType: boolean
 ) {
   if (activePlanet && activeInfoType) {
-    return { opacity: 1 };
+    return { x: 0, opacity: 1 };
   } else if (activeInfoType) {
-    return { opacity: 0 };
+    return { x: 500, opacity: 0 };
   } else {
-    return { opacity: 0 };
+    return { x: 500, opacity: 0 };
+  }
+}
+
+export function getFooterAnimation(
+  activePlanet: boolean,
+  activeInfoType: boolean
+) {
+  if (activeInfoType && activePlanet) {
+    return { y: 0, opacity: 1 };
+  } else {
+    return { y: 1000, opacity: 0 };
   }
 }

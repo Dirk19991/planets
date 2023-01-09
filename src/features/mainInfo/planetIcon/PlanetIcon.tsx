@@ -15,23 +15,37 @@ const PlanetIconContainer = styled(motion.div)<PlanetIconContainerProps>`
   max-height: 500px;
   position: relative;
 
+  @media (max-width: 1024px) {
+    min-width: 350px;
+    min-height: 350px;
+  }
+
   &::before {
     position: absolute;
     content: '';
-    background: url(${(props) => (props.image ? props.image : '')}) no-repeat
-      center;
-    width: 100%;
-    height: 100%;
-    transform: scale(0.4) translateY(100%);
+    background-image: url(${(props) => (props.image ? props.image : '')});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100px;
+    height: 30%;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50px);
+    z-index: 100;
 
-    left: 0;
-    z-index: 10;
+    @media (max-width: 1024px) {
+    }
   }
 `;
 
 const PlanetImage = styled(motion.img)`
   width: 100%;
   height: 100%;
+  @media (max-width: 1024px) {
+    width: 85%;
+    height: 85%;
+  }
 `;
 
 function PlanetIcon() {
@@ -53,7 +67,7 @@ function PlanetIcon() {
     <PlanetIconContainer
       initial={{ opacity: 1, scale: 1 }}
       animate={getIconAnimation(activePlanet, activeInfoType)}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 1 }}
       image={beforeImageLink}
     >
       <PlanetImage src={getImgUrl(currentPlanet, currentInfoType)[0]} alt='' />

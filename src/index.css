@@ -18,7 +18,16 @@ html {
   background-color: rgb(7, 7, 34);
   font-family: 'Spartan', sans-serif;
   font-size: 16px;
+  overflow: hidden;
 }
+
 body {
   height: 100%;
+}
+
+@media (max-width: 1024px) {
+  html {
+    overflow: auto;
+    overflow-x: hidden;
+  }
 }
