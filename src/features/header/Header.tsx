@@ -5,10 +5,10 @@ import { Planet } from '../mainInfo/mainInfoSlice';
 import { setPlanet } from '../mainInfo/mainInfoSlice';
 import { setActivePlanet } from '../../app/animationSlice';
 import { motion } from 'framer-motion';
-import Hamburger from 'hamburger-react';
-import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import MobileHeader from './MobileHeader';
+import { setOpenMenu } from '../../app/burgerSlice';
+import { useEffect } from 'react';
 
 const HeaderFlex = styled(Flex)`
   position: relative;
@@ -18,6 +18,7 @@ const HeaderFlex = styled(Flex)`
   margin-bottom: 1rem;
   @media (max-width: 1024px) {
     gap: 1.5rem;
+    margin-bottom: -2rem;
   }
 `;
 
@@ -32,7 +33,6 @@ const PlanetsHeader = styled.div`
   font-family: 'Antonio';
   font-size: 1.7rem;
   letter-spacing: -0.05rem;
-  cursor: pointer;
 `;
 
 const PlanetDiv = styled(motion.div)`
@@ -67,6 +67,10 @@ function Header() {
     'Uranus',
     'Neptune',
   ];
+
+  useEffect(() => {
+    dispatch(setOpenMenu(false));
+  }, [mobile]);
 
   const dispatch = useAppDispatch();
 
