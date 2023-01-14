@@ -3,6 +3,7 @@ import { useAppSelector } from '../../../app/store';
 import { motion } from 'framer-motion';
 import { getIconAnimation } from '../../../utils/animations';
 import { getImgUrl } from '../../../utils/getImgUrl';
+import PreloadedImages from './PreloadedImages';
 
 interface PlanetIconContainerProps {
   image?: string;
@@ -39,17 +40,13 @@ const PlanetIconContainer = styled(motion.div)<PlanetIconContainerProps>`
   }
 `;
 
-const PlanetImage = styled(motion.img)`
+export const PlanetImage = styled(motion.img)`
   width: 100%;
   height: 100%;
   @media (max-width: 1024px) {
     width: 85%;
     height: 85%;
   }
-`;
-
-const PlanetImageInvisible = styled(PlanetImage)`
-  display: none;
 `;
 
 function PlanetIcon() {
@@ -71,14 +68,14 @@ function PlanetIcon() {
 
   return (
     <>
-      <PlanetImageInvisible src={source} alt='' />
+      <PreloadedImages />
       <PlanetIconContainer
         initial={{ opacity: 1, scale: 1 }}
         animate={getIconAnimation(activePlanet, activeInfoType)}
         transition={{ duration: 1 }}
         image={beforeImageLink}
       >
-        <PlanetImage src={source} alt='' />
+        <PlanetImage src={source} alt={source} />
       </PlanetIconContainer>
     </>
   );
