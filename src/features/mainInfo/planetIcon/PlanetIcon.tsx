@@ -36,6 +36,7 @@ const PlanetIconContainer = styled(motion.div)<PlanetIconContainerProps>`
     z-index: 100;
 
     @media (max-width: 1024px) {
+      transform: translateX(-50px) translateY(-20px);
     }
   }
 `;
