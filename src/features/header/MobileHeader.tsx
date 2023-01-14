@@ -57,13 +57,17 @@ function MobileHeader() {
       setOpen();
       return;
     }
-
+    document.body.style.overflowY = 'hidden';
     setOpen();
     dispatch(setActivePlanet(false));
     setTimeout(() => {
       dispatch(setActivePlanet(true));
       dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
     }, 1000);
+
+    setTimeout(() => {
+      document.body.style.overflowY = 'auto';
+    }, 2000);
   };
 
   return (

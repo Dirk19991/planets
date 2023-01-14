@@ -80,12 +80,17 @@ function Header() {
     if (planet === currentPlanet) {
       return;
     }
+    document.body.style.overflowY = 'hidden';
 
     dispatch(setActivePlanet(false));
     setTimeout(() => {
       dispatch(setActivePlanet(true));
       dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
     }, 1000);
+
+    setTimeout(() => {
+      document.body.style.overflowY = 'auto';
+    }, 2000);
   };
 
   const slashMotion = {

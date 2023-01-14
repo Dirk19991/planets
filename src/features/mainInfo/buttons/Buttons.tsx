@@ -72,12 +72,18 @@ function Buttons() {
     if (infoType === currentInfoType) {
       return;
     }
+
     dispatch(setActiveInfoType(false));
+    document.body.style.overflowY = 'hidden';
 
     setTimeout(() => {
       dispatch(setPlanet({ infoType: infoType }));
       dispatch(setActiveInfoType(true));
     }, 1400);
+
+    setTimeout(() => {
+      document.body.style.overflowY = 'auto';
+    }, 2400);
   };
 
   return (

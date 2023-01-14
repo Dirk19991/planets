@@ -6,8 +6,8 @@ export interface PlanetIsOnscreen {
 }
 
 const initialState: PlanetIsOnscreen = {
-  isActivePlanet: false,
-  isActiveInfoType: false,
+  isActivePlanet: true,
+  isActiveInfoType: true,
 };
 
 const animationSlice = createSlice({

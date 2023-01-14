@@ -23,11 +23,5 @@ html {
 
 body {
   height: 100%;
-}
-
-@media (max-width: 1024px) {
-  html {
-    overflow: auto;
-    overflow-x: hidden;
-  }
+  overflow-x: hidden;
 }
