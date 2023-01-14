@@ -63,6 +63,8 @@ function PlanetIcon() {
     ? (beforeImageLink = getImgUrl(currentPlanet, currentInfoType)[1])
     : (beforeImageLink = '');
 
+  const source = getImgUrl(currentPlanet, currentInfoType)[0];
+
   return (
     <PlanetIconContainer
       initial={{ opacity: 1, scale: 1 }}
@@ -70,7 +72,7 @@ function PlanetIcon() {
       transition={{ duration: 1 }}
       image={beforeImageLink}
     >
-      <PlanetImage src={getImgUrl(currentPlanet, currentInfoType)[0]} alt='' />
+      <PlanetImage src={source} alt='' />
     </PlanetIconContainer>
   );
 }
