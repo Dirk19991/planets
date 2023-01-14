@@ -58,10 +58,10 @@ function PlanetIcon() {
     (state) => state.animation.isActiveInfoType
   );
 
-  let beforeImageLink;
+  let beforeImageLink: string;
   currentInfoType === 'surface'
     ? (beforeImageLink = getImgUrl(currentPlanet, currentInfoType)[1])
-    : '';
+    : (beforeImageLink = '');
 
   return (
     <PlanetIconContainer
