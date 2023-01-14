@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 import { getImgUrl } from '../../../utils/getImgUrl';
 import { InfoType, Planet } from '../mainInfoSlice';
@@ -32,8 +33,6 @@ function PreloadedImages() {
     return planetImages;
   });
 
-  console.log(sources.flat());
-
   return (
     <StyledPreloadedImages>
       {sources.flat().map((source) => (
@@ -42,4 +41,4 @@ function PreloadedImages() {
     </StyledPreloadedImages>
   );
 }
-export default PreloadedImages;
+export default memo(PreloadedImages);
