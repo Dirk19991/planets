@@ -48,6 +48,10 @@ const PlanetImage = styled(motion.img)`
   }
 `;
 
+const PlanetImageInvisible = styled(PlanetImage)`
+  display: none;
+`;
+
 function PlanetIcon() {
   const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
   const currentInfoType = useAppSelector((state) => state.mainInfo.infoType);
@@ -66,14 +70,17 @@ function PlanetIcon() {
   const source = getImgUrl(currentPlanet, currentInfoType)[0];
 
   return (
-    <PlanetIconContainer
-      initial={{ opacity: 1, scale: 1 }}
-      animate={getIconAnimation(activePlanet, activeInfoType)}
-      transition={{ duration: 1 }}
-      image={beforeImageLink}
-    >
-      <PlanetImage src={source} alt='' />
-    </PlanetIconContainer>
+    <>
+      <PlanetImageInvisible src={source} alt='' />
+      <PlanetIconContainer
+        initial={{ opacity: 1, scale: 1 }}
+        animate={getIconAnimation(activePlanet, activeInfoType)}
+        transition={{ duration: 1 }}
+        image={beforeImageLink}
+      >
+        <PlanetImage src={source} alt='' />
+      </PlanetIconContainer>
+    </>
   );
 }
 export default PlanetIcon;
