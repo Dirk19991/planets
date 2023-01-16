@@ -3,22 +3,14 @@ import styled from 'styled-components';
 import { getImgUrl } from '../../../utils/getImgUrl';
 import { InfoType, Planet } from '../mainInfoSlice';
 import { PlanetImage } from './PlanetIcon';
+import { planets } from '../../../data/planetsList';
 
 const StyledPreloadedImages = styled.div`
   display: none;
 `;
 
 function PreloadedImages() {
-  const planets: Planet[] = [
-    'Mercury',
-    'Venus',
-    'Earth',
-    'Mars',
-    'Jupiter',
-    'Saturn',
-    'Uranus',
-    'Neptune',
-  ];
+  // прелоад иконок в скрытый компонент, чтобы избежать мерцания при анимации
 
   const infoTypes: InfoType[] = ['overview', 'internal', 'surface'];
 

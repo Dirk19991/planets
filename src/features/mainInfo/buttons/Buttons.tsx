@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { Flex } from '../../../common/Flex';
 import { InfoType, setPlanet } from '../mainInfoSlice';
-import { setActiveInfoType } from '../../../app/animationSlice';
+import { animateInfoType } from '../../../app/animationSlice';
 import { useMediaQuery } from 'react-responsive';
 
 interface ButtonProps {
@@ -44,6 +44,7 @@ const Button = styled.button<ButtonProps>`
 
   @media (max-width: 1024px) {
     width: 100px;
+    padding: 0.2rem;
     border: none;
     background-color: rgb(7, 7, 34);
     line-height: 2.5;
@@ -51,7 +52,6 @@ const Button = styled.button<ButtonProps>`
       props.selected ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.5)'};
 
     &:hover {
-      transform: scale(1.2);
       background-color: rgb(7, 7, 34);
     }
   }
@@ -73,12 +73,14 @@ function Buttons() {
       return;
     }
 
-    dispatch(setActiveInfoType(false));
+    dispatch(animateInfoType(false));
+
+    // убираем скролл при анимации
     document.body.style.overflowY = 'hidden';
 
     setTimeout(() => {
       dispatch(setPlanet({ infoType: infoType }));
-      dispatch(setActiveInfoType(true));
+      dispatch(animateInfoType(true));
     }, 1400);
 
     setTimeout(() => {

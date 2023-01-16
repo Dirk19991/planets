@@ -21,7 +21,7 @@ function Main() {
   });
 
   return (
-    <MainContainer justify='space-between'>
+    <MainContainer as='main' justify='space-between'>
       {mobile && <Buttons />}
       <PlanetIcon />
       <PlanetInfo />

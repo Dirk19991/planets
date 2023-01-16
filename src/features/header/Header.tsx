@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../app/store';
+import { useAppDispatch } from '../../app/store';
 import { Flex } from '../../common/Flex';
-import { Planet } from '../mainInfo/mainInfoSlice';
-import { setPlanet } from '../mainInfo/mainInfoSlice';
-import { setActivePlanet } from '../../app/animationSlice';
-import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 import MobileHeader from './MobileHeader';
-import { setOpenMenu } from '../../app/burgerSlice';
+import { setOpenMenu } from './burgerSlice';
 import { useEffect } from 'react';
+import DesktopHeader from './DesktopHeader';
 
 const HeaderFlex = styled(Flex)`
   position: relative;
@@ -22,32 +19,10 @@ const HeaderFlex = styled(Flex)`
   }
 `;
 
-const PlanetsFlex = styled(Flex)`
-  font-size: 0.7rem;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  cursor: pointer;
-`;
-
 const PlanetsHeader = styled.div`
   font-family: 'Antonio';
   font-size: 1.7rem;
   letter-spacing: -0.05rem;
-`;
-
-const PlanetDiv = styled(motion.div)`
-  position: relative;
-`;
-
-const UpperLine = styled(motion.div)`
-  position: absolute;
-  display: block;
-  width: 80%;
-  height: 4px;
-  background-color: white;
-  top: -30px;
-  left: 10%;
-  opacity: 1;
 `;
 
 function Header() {
@@ -55,87 +30,17 @@ function Header() {
     query: '(max-width: 1024px)',
   });
 
-  const isOpened = useAppSelector((state) => state.burger.isOpened);
-
-  const planets: Planet[] = [
-    'Mercury',
-    'Venus',
-    'Earth',
-    'Mars',
-    'Jupiter',
-    'Saturn',
-    'Uranus',
-    'Neptune',
-  ];
-
   useEffect(() => {
     dispatch(setOpenMenu(false));
   }, [mobile]);
 
   const dispatch = useAppDispatch();
 
-  const currentPlanet = useAppSelector((state) => state.mainInfo.planet);
-
-  const setPlanetHandler = (planet: Planet) => {
-    if (planet === currentPlanet) {
-      return;
-    }
-    document.body.style.overflowY = 'hidden';
-
-    dispatch(setActivePlanet(false));
-    setTimeout(() => {
-      dispatch(setActivePlanet(true));
-      dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
-    }, 1000);
-
-    setTimeout(() => {
-      document.body.style.overflowY = 'auto';
-    }, 2000);
-  };
-
-  const slashMotion = {
-    rest: {
-      opacity: 0,
-      ease: 'easeOut',
-      duration: 0.2,
-      type: 'tween',
-    },
-    hover: {
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        type: 'tween',
-        ease: 'easeIn',
-      },
-    },
-  };
-
   return (
     <>
-      <HeaderFlex justify='space-between' align='center'>
+      <HeaderFlex as='header' justify='space-between' align='center'>
         <PlanetsHeader>THE PLANETS</PlanetsHeader>
-        {!mobile && (
-          <PlanetsFlex justify='space-between' align='center' gap='2rem'>
-            {planets.map((planet) => (
-              <motion.div
-                initial='rest'
-                whileHover='hover'
-                animate='rest'
-                key={planet}
-              >
-                <PlanetDiv onClick={() => setPlanetHandler(planet)}>
-                  {currentPlanet === planet && <UpperLine />}
-                  <UpperLine
-                    variants={slashMotion}
-                    animate={{ width: '80%' }}
-                  />
-                  {planet.toUpperCase()}
-                </PlanetDiv>
-              </motion.div>
-            ))}
-          </PlanetsFlex>
-        )}
-
+        {!mobile && <DesktopHeader />}
         {mobile && <MobileHeader />}
       </HeaderFlex>
     </>

@@ -1,10 +1,10 @@
 import Hamburger from 'hamburger-react';
-import { useState } from 'react';
+import { planets } from '../../data/planetsList';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../app/store';
 import { Planet, setPlanet } from '../mainInfo/mainInfoSlice';
-import { setOpenMenu } from '../../app/burgerSlice';
-import { setActivePlanet } from '../../app/animationSlice';
+import { setOpenMenu } from './burgerSlice';
+import { animatePlanet } from '../../app/animationSlice';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const PlanetColumn = styled(motion.div)`
@@ -33,17 +33,6 @@ const MobilePlanet = styled(motion.div)`
 `;
 
 function MobileHeader() {
-  const planets: Planet[] = [
-    'Mercury',
-    'Venus',
-    'Earth',
-    'Mars',
-    'Jupiter',
-    'Saturn',
-    'Uranus',
-    'Neptune',
-  ];
-
   const dispatch = useAppDispatch();
   const isOpened = useAppSelector((state) => state.burger.isOpened);
   const setOpen = () => {
@@ -57,11 +46,14 @@ function MobileHeader() {
       setOpen();
       return;
     }
+    // убираем скролл при анимации
     document.body.style.overflowY = 'hidden';
+
     setOpen();
-    dispatch(setActivePlanet(false));
+
+    dispatch(animatePlanet(false));
     setTimeout(() => {
-      dispatch(setActivePlanet(true));
+      dispatch(animatePlanet(true));
       dispatch(setPlanet({ planet: planet, infoType: 'overview' }));
     }, 1000);
 

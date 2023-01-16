@@ -66,15 +66,12 @@ function AdditionalInfo() {
   const activePlanet = useAppSelector(
     (state) => state.animation.isActivePlanet
   );
-
-  const rotationTime = currentPlanetInfo[0].rotationTime;
-  const revolutionTime = currentPlanetInfo[0].revolutionTime;
-  const radius = currentPlanetInfo[0].radius;
-  const averageTemp = currentPlanetInfo[0].averageTemperature;
+  const { rotationTime, revolutionTime, radius, averageTemperature } =
+    currentPlanetInfo[0];
 
   return (
     <AdditionalInfoFlex
-      as={motion.div}
+      as={motion.footer}
       animate={getFooterAnimation(activeInfoType, activePlanet)}
       transition={{ duration: 1 }}
       justify='space-between'
@@ -94,7 +91,7 @@ function AdditionalInfo() {
       </InfoBox>
       <InfoBox align='flex-start' direction='column' gap='0.5rem'>
         <InfoBoxHeader>Average Temp.</InfoBoxHeader>
-        <InfoBoxContent>{averageTemp}</InfoBoxContent>
+        <InfoBoxContent>{averageTemperature}</InfoBoxContent>
       </InfoBox>
     </AdditionalInfoFlex>
   );

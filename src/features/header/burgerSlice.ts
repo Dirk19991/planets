@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Burger {
   isOpened: boolean;
@@ -12,7 +12,7 @@ const burgerSlice = createSlice({
   name: 'burger',
   initialState,
   reducers: {
-    setOpenMenu(state, action) {
+    setOpenMenu(state, action: PayloadAction<boolean>) {
       state.isOpened = action.payload;
     },
   },

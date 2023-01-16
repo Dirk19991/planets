@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import mainInfoSlice from '../features/mainInfo/mainInfoSlice';
 import animationSlice from './animationSlice';
-import burgerSlice from './burgerSlice';
+import burgerSlice from '../features/header/burgerSlice';
 
 const rootReducer = combineReducers({
   mainInfo: mainInfoSlice,

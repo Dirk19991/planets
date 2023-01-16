@@ -16,14 +16,15 @@ const FlexPlanetInfo = styled(Flex)`
   }
 `;
 
-const PlanetName = styled(motion.div)`
+const PlanetName = styled(motion.h2)`
   font-size: 4rem;
   font-family: 'Antonio', sans-serif;
   text-transform: uppercase;
   color: white;
+  font-weight: normal;
 `;
 
-const PlanetDescription = styled(motion.div)`
+const PlanetDescription = styled(motion.p)`
   font-family: 'Spartan', sans-serif;
   color: rgb(255, 255, 255, 0.7);
   line-height: 1.5rem;
@@ -50,7 +51,7 @@ function PlanetInfo() {
 
   return (
     <FlexPlanetInfo
-      as={motion.div}
+      as={motion.section}
       direction='column'
       justify='space-between'
       align='flex-start'

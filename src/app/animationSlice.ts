@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface PlanetIsOnscreen {
   isActivePlanet: boolean;
@@ -14,10 +14,10 @@ const animationSlice = createSlice({
   name: 'animation',
   initialState,
   reducers: {
-    setActivePlanet(state, action) {
+    animatePlanet(state, action: PayloadAction<boolean>) {
       state.isActivePlanet = action.payload;
     },
-    setActiveInfoType(state, action) {
+    animateInfoType(state, action: PayloadAction<boolean>) {
       state.isActiveInfoType = action.payload;
     },
   },
@@ -25,4 +25,4 @@ const animationSlice = createSlice({
 
 export default animationSlice.reducer;
 
-export const { setActivePlanet, setActiveInfoType } = animationSlice.actions;
+export const { animatePlanet, animateInfoType } = animationSlice.actions;

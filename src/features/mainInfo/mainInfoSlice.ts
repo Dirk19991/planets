@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type Planet =
   | 'Mercury'
@@ -27,7 +27,10 @@ const mainInfoSlice = createSlice({
   name: 'mainInfo',
   initialState,
   reducers: {
-    setPlanet(state, action) {
+    setPlanet(
+      state,
+      action: PayloadAction<{ planet?: Planet; infoType: InfoType }>
+    ) {
       state.planet = action.payload.planet
         ? action.payload.planet
         : state.planet;
