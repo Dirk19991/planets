@@ -8,7 +8,7 @@
 
 [![My Skills](https://skillicons.dev/icons?i=react,redux,ts)](https://skillicons.dev)
 
-+ библиотека framer-motion
++библиотека framer-motion
 
 ## Полное описание
 
