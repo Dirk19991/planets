@@ -24,7 +24,7 @@ html {
   font-family: 'Spartan', sans-serif;
   font-size: 16px;
   overflow-x: hidden;
-  font-display: block;
+  font-display: optional;
 }
 
 body {
