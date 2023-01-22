@@ -70,12 +70,12 @@ function DesktopHeader() {
   };
 
   return (
-    <StyledDesktopHeader justify='space-between' align='center' gap='2rem'>
+    <StyledDesktopHeader justify="space-between" align="center" gap="2rem">
       {planets.map((planet) => (
         <motion.div
-          initial='rest'
-          whileHover='hover'
-          animate='rest'
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
           key={planet}
         >
           <PlanetDiv onClick={() => setPlanetHandler(planet)}>

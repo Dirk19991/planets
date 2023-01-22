@@ -38,7 +38,7 @@ function Header() {
 
   return (
     <>
-      <HeaderFlex as='header' justify='space-between' align='center'>
+      <HeaderFlex as="header" justify="space-between" align="center">
         <PlanetsHeader>THE PLANETS</PlanetsHeader>
         {!mobile && <DesktopHeader />}
         {mobile && <MobileHeader />}
