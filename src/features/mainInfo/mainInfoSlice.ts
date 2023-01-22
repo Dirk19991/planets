@@ -31,9 +31,9 @@ const mainInfoSlice = createSlice({
       state,
       action: PayloadAction<{ planet?: Planet; infoType: InfoType }>
     ) {
-      state.planet = action.payload.planet
-        ? action.payload.planet
-        : state.planet;
+      if (action.payload.planet) {
+        state.planet = action.payload.planet;
+      }
       state.infoType = action.payload.infoType;
     },
   },
