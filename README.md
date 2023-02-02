@@ -25,8 +25,8 @@
 ## Инструкция по установке
 
 ```
-git clone https://github.com/Dirk19991/megamir-test.git
-cd .\megamir-test\
+git clone https://github.com/Dirk19991/planets.git
+cd .\planets\
 npm install
 npm run dev
 ```
